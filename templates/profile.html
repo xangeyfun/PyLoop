@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Profile {{ data.username }}{% endblock %}
+
+{% block content %}
+<section class="profile-section">
+    <h2>{{ data.username }}'s Profile</h2>
+    <div class="profile-info">
+        <p><strong>Lines of Code:</strong> {{ data.loc }}</p>
+    </div>
+    <p>Your secret token (DO NOT SHARE THIS):</p>
+    <span class="spoiler" onclick="this.classList.toggle('revealed')">
+    {{ data.token }}
+    </span>
+</section>
+{% endblock %}

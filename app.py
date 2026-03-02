@@ -1,4 +1,5 @@
 from flask import Flask, redirect, jsonify, request, render_template, session, flash, get_flashed_messages
+from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.middleware.proxy_fix import ProxyFix
 from datetime import datetime
 from dotenv import load_dotenv
@@ -24,7 +25,7 @@ os.makedirs("saves", exist_ok=True)
 @app.before_request
 def remove_trailing_slash():
     if request.path != '/' and request.path.endswith('/'):
-        return redirect(request.path[:-1]), 301
+        return redirect(request.path[:-1])
 
 @app.after_request
 def add_cors(response):
@@ -42,7 +43,7 @@ def home():
 def play():
     if 'user' not in session:
         flash("Please log in to play the game.", "error")
-        return redirect("/login"), 401
+        return redirect("/login")
     return render_template("game.html"), 200
 
 @app.route("/login", methods=["GET"])
@@ -53,9 +54,37 @@ def login():
 def register():
     return render_template("register.html"), 200
 
+@app.route("/logout", methods=["GET"])
+def logout():
+    if 'user' not in session:
+        flash("You are not logged in.", "error")
+        return redirect("/login")
+    session.pop('user', None)
+    flash("Logged out successfully.", "success")
+    return redirect("/")
+
 @app.route("/github", methods=["GET"])
 def github():
-    return redirect("https://github.com/xangey_fun/PyLoop"), 302
+    return redirect("https://github.com/xangey_fun/PyLoop")
+
+@app.route("/profile/<user>", methods=["GET"])
+def profile(user):
+    if 'user' not in session:
+        flash("Please log in to view your profile.", "error")
+        return redirect("/login")
+    if user != session['user']:
+        flash("You can only view your own profile.", "error")
+        return redirect("/profile/" + session['user'])
+    
+    with open(f"saves/{user}.json", "r") as f:
+        try:
+            user_data = json.load(f)
+        except Exception as e:
+            with open("error_log.txt", "a") as f:
+                f.write(f"app.py - [{datetime.now().isoformat()}] - Error reading profile data for {user}: {str(e)}\n")
+            flash("An error occurred while loading your profile. Please try again.", "error")
+            return redirect("/")
+    return render_template("profile.html", data=user_data), 200
 
 # API
 
@@ -66,18 +95,59 @@ def api_register():
 
     if not username or not password:
         flash("Username and password are required.", "error")
-        return redirect("/register"), 400
+        return redirect("/register")
 
     if ' ' in username or ' ' in password:
         flash("Username and password cannot contain spaces.", "error")
-        return redirect("/register"), 400
+        return redirect("/register")
 
     if len(username) < 3 or len(password) < 6:
         flash("Username must be at least 3 characters and password at least 6 characters.", "error")
-        return redirect("/register"), 400
-
-    if 
+        return redirect("/register")
     
+    if os.path.exists(f"saves/{username}.json"):
+        flash("Username already exists.", "error")
+        return redirect("/register")
+
+    try:
+        with open(f"saves/{username}.json", "w") as f:
+            json.dump({"username": username, "password": generate_password_hash(password), "token": secrets.token_hex(3)}, f, indent=4)
+    except Exception as e:
+        with open("error_log.txt", "a") as f:
+            f.write(f"app.py - [{datetime.now().isoformat()}] - Error creating user {username}: {str(e)}\n")
+        flash("An error occurred while creating your account. Please try again.", "error")
+        return redirect("/register")
+    flash("Account created successfully! Please log in.", "success")
+    return redirect("/login")
+
+@app.route("/api/login", methods=["POST"]) # type: ignore
+def api_login():
+    username = request.form.get("username").strip() # type: ignore
+    password = request.form.get("password").strip() # type: ignore
+
+    if not username or not password:
+        flash("Username and password are required.", "error")
+        return redirect("/login")
+
+    if not os.path.exists(f"saves/{username}.json"):
+        flash("Invalid username or password.", "error")
+        return redirect("/login")
+
+    try:
+        with open(f"saves/{username}.json", "r") as f:
+            data = json.load(f)
+            if check_password_hash(data["password"], password):
+                session['user'] = username
+                flash("Logged in successfully!", "success")
+                return redirect("/")
+            else:
+                flash("Invalid username or password.", "error")
+                return redirect("/login")
+    except Exception as e:
+        with open("error_log.txt", "a") as f:
+            f.write(f"app.py - [{datetime.now().isoformat()}] - Error during login for {username}: {str(e)}\n")
+        flash("An error occurred while logging in. Please try again.", "error")
+        return redirect("/login")
 
 @app.route("/api/construct", methods=["OPTIONS","GET","POST"]) # type: ignore
 def api_construct():
