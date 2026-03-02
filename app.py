@@ -1,4 +1,4 @@
-from flask import Flask, redirect, jsonify, request, render_template
+from flask import Flask, redirect, jsonify, request, render_template, session, flash, get_flashed_messages
 from werkzeug.middleware.proxy_fix import ProxyFix
 from datetime import datetime
 from dotenv import load_dotenv
@@ -19,7 +19,7 @@ app.config.update(
 )
 os.makedirs("saves", exist_ok=True)
 
-# Remove trailing slashes
+# middleware
 
 @app.before_request
 def remove_trailing_slash():
@@ -32,7 +32,7 @@ def add_cors(response):
     response.headers["Access-Control-Allow-Headers"] = "X-Secret-Key, Content-Type"
     return response
 
-# About pages
+# pages
 
 @app.route("/", methods=["GET"])
 def home():
@@ -40,11 +40,44 @@ def home():
 
 @app.route("/play", methods=["GET"])
 def play():
+    if 'user' not in session:
+        flash("Please log in to play the game.", "error")
+        return redirect("/login"), 401
     return render_template("game.html"), 200
+
+@app.route("/login", methods=["GET"])
+def login():
+    return render_template("login.html"), 200
+
+@app.route("/register", methods=["GET"])
+def register():
+    return render_template("register.html"), 200
 
 @app.route("/github", methods=["GET"])
 def github():
     return redirect("https://github.com/xangey_fun/PyLoop"), 302
+
+# API
+
+@app.route("/api/register", methods=["POST"]) # type: ignore
+def api_register():
+    username = request.form.get("username").strip() # type: ignore
+    password = request.form.get("password").strip() # type: ignore
+
+    if not username or not password:
+        flash("Username and password are required.", "error")
+        return redirect("/register"), 400
+
+    if ' ' in username or ' ' in password:
+        flash("Username and password cannot contain spaces.", "error")
+        return redirect("/register"), 400
+
+    if len(username) < 3 or len(password) < 6:
+        flash("Username must be at least 3 characters and password at least 6 characters.", "error")
+        return redirect("/register"), 400
+
+    if 
+    
 
 @app.route("/api/construct", methods=["OPTIONS","GET","POST"]) # type: ignore
 def api_construct():

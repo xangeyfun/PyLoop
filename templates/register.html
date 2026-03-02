@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <h2>Register to PyLoop</h2>
+    <form action="/api/register" method="POST" class="auth-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required minlength="3">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required minlength="6">
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p class="auth-link">Already have an account? <a href="/login">Login here</a>.</p>
+</section>
+{% endblock %}

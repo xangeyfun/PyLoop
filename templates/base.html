@@ -5,9 +5,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/x-icon">
+
+        <meta property="og:title" content="PyLoop - {{ self.title() }}">
+        <meta property="og:description" content="A simple idle clicker game built with Construct 3 and Flask backend.">
+        <meta property="og:image" content="{{ url_for('static', filename='images/favicon.png') }}">
+        <meta property="og:url" content="{{ request.url }}">
+        <meta property="og:type" content="website">
+
         <title>{% block title %}Pyloop - {% endblock %}</title>
     </head>
     <body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-container">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
         <nav class="navbar">
             <div class="nav-left">
                 <a href="/">
@@ -17,8 +33,13 @@
             </div>
 
             <div class="nav-right">
-                <a href="/play">Play</a>
-                <a href="https://github.com/xangeyfun/PyLoop" target="_blank">GitHub</a>
+                {% if session.user %}
+                    <span>Welcome, {{ session.user }}!</span>
+                    <a href="/logout">Logout</a>
+                {% else %}
+                    <a href="/register">Register</a>
+                    <a href="/login">Login</a>
+                {% endif %}
             </div>
         </nav>
         {% block content %}{% endblock %}

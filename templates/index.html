@@ -3,5 +3,34 @@
 {% block title %}Idle Clicker Game{% endblock %}
 
 {% block content %}
-<p>test</p>
+<section class="hero">
+    <h1>PyLoop</h1>
+    <p>
+        A modern idle clicker game built with Construct 3 and Flask.
+        Click, upgrade, and watch your code knowledge grow while playing.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="/play" class="btn btn-primary">Play Game</a>
+        <a href="https://github.com/xangeyfun/PyLoop" class="btn btn-secondary">View on GitHub</a>
+    </div>
+</section>
+
+<section class="feature-grid">
+    <div class="card">
+        <h3>💡 Idle Gameplay</h3>
+        <p>Earn LOC automatically over time or by clicking.</p>
+    </div>
+
+    <div class="card">
+        <h3>💾 Cloud Saves</h3>
+        <p>Your progress is stored securely on the server.</p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Fast Backend</h3>
+        <p>Powered by Flask and lightweight API design.</p>
+    </div>
+</section>
+
 {% endblock %}
