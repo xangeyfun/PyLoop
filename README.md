@@ -90,5 +90,3 @@ This project is licensed under the MIT License.
 ---
 
 Made by xangey_fun
-
-```

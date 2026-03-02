@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/x-icon">
+        <title>{% block title %}Pyloop - {% endblock %}</title>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="/">
+                    <img src="/static/images/favicon.png" class="logo">
+                </a>
+                <span class="site-name"><a href="/">PyLoop</a></span>
+            </div>
+
+            <div class="nav-right">
+                <a href="/play">Play</a>
+                <a href="https://github.com/xangeyfun/PyLoop" target="_blank">GitHub</a>
+            </div>
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>

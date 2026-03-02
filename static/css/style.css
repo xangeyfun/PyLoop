@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #152331, #000, #152331);
+    color: white;
+    background-size: 300% 300%;
+    min-height: 100vh;
+    animation: moveGradient 20s ease infinite;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px 24px;
+    background: #0f0f0f;
+    border-radius: 10px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-left a {
+    color: white;
+    text-decoration: none;
+    font-family: monospace;
+}
+
+.nav-left a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+}
+
+.site-name {
+    font-family: monospace;
+    color: white;
+    font-size: 18px;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-right a {
+    color: white;
+    text-decoration: none;
+    font-family: monospace;
+}
+
+.nav-right a:hover {
+    text-decoration: underline;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
