@@ -1,6 +1,3 @@
-yeah 👍 i’ll keep it simple, clean, and school-assignment friendly. you can paste this directly into `README.md`.
-
-````markdown
 # PyLoop
 
 PyLoop is a coding-themed idle clicker game built using Flask and Construct 3.  
