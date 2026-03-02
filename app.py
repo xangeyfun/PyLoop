@@ -1,4 +1,4 @@
-from flask import Flask, redirect, jsonify, request, render_template, session, flash, send_from_directory
+from flask import Flask, redirect, jsonify, request, render_template, session, flash, send_from_directory, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.middleware.proxy_fix import ProxyFix
 from datetime import datetime
@@ -27,19 +27,16 @@ def remove_trailing_slash():
     if request.path != '/' and request.path.endswith('/'):
         return redirect(request.path[:-1])
 
+@app.before_request
+def ip_restrict():
+    if request.remote_addr not in []:
+        abort(401)
+
 @app.after_request
 def add_cors(response):
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Headers"] = "X-Secret-Key, Content-Type"
     return response
-
-@app.route("/scripts/<path:filename>")
-def serve_scripts(filename):
-    return send_from_directory("static/game/scripts", filename)
-
-@app.route("/style.css")
-def serve_css():
-    return send_from_directory("static/game", "style.css")
 
 # pages
 
