@@ -11,7 +11,7 @@ import os
 
 load_dotenv()
 app = Flask(__name__, static_folder="static", template_folder="templates")
-app.secret_key = secrets.token_hex(32)
+app.secret_key = os.getenv("TOKEN")
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
 app.config.update(
     SESSION_COOKIE_SECURE=True,
@@ -31,7 +31,7 @@ def remove_trailing_slash():
 
 @app.before_request
 def ip_restrict():
-    if request.remote_addr not in ["104.28.158.17"]:
+    if request.remote_addr not in ["127.0.0.1"] and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
         abort(401)
 
 # pages
@@ -82,7 +82,7 @@ def logout():
 
 @app.route("/github", methods=["GET"])
 def github():
-    return redirect("https://github.com/xangey_fun/PyLoop")
+    return redirect("https://github.com/xangeyfun/PyLoop")
 
 @app.route("/profile/<user>", methods=["GET"])
 def profile(user):
