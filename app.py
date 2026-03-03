@@ -12,7 +12,7 @@ import os
 load_dotenv()
 app = Flask(__name__, static_folder="static", template_folder="templates")
 app.secret_key = secrets.token_hex(32)
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
 app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
@@ -33,12 +33,6 @@ def remove_trailing_slash():
 def ip_restrict():
     if request.remote_addr not in ["104.28.158.17"]:
         abort(401)
-
-@app.after_request
-def add_cors(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Headers"] = "X-Secret-Key, Content-Type"
-    return response
 
 # pages
 
@@ -65,11 +59,8 @@ def home():
 
     return render_template("index.html"), 200
 
-@app.route("/play", methods=["GET"])
+@app.route("/game", methods=["GET"])
 def play():
-    if 'user' not in session:
-        flash("Please log in to play the game.", "error")
-        return redirect("/login")
     return send_from_directory("static/game", "index.html"), 200
 
 @app.route("/login", methods=["GET"])
@@ -136,7 +127,17 @@ def api_register():
 
     try:
         with open(f"saves/{username}.json", "w") as f:
-            json.dump({"username": username, "password": generate_password_hash(password), "token": secrets.token_hex(3), "game_data": {}}, f, indent=4)
+            json.dump({"username": username, "password": generate_password_hash(password), "token": secrets.token_hex(3),
+            "game_data": {
+                "loc": 0,
+                "click_value": 1,
+                "loc_per_sec": 0,
+                "multiplier": 1,
+                "u1_price": 25,
+                "u1_owned": 1,
+                "u2_owned": 1,
+                "u2_price": 120
+            }}, f, indent=4)
     except Exception as e:
         with open("error_log.txt", "a") as f:
             f.write(f"app.py - [{datetime.now().isoformat()}] - Error creating user {username}: {str(e)}\n")
@@ -174,44 +175,6 @@ def api_login():
         flash("An error occurred while logging in. Please try again.", "error")
         return redirect("/login")
 
-# @app.route("/api/construct", methods=["OPTIONS","GET","POST"])
-# def api_construct():
-#     if request.method == "OPTIONS":
-#         return "", 200
-
-#     if request.headers.get("X-Secret-Key") != os.getenv("PYLOOP_TOKEN"):
-#         return jsonify({"error": "Unauthorized"}), 401
-
-#     if 'user' not in session:
-#         return jsonify({"error": "Not logged in"}), 401
-
-#     file_path = f"saves/{session['user']}.json"
-
-#     if not os.path.exists(file_path):
-#         return jsonify({"error": "User not found"}), 404
-
-#     # LOAD
-#     if request.method == "GET":
-#         with open(file_path, "r") as f:
-#             user_data = json.load(f)
-#         return jsonify(user_data.get("game_data", {})), 200
-
-#     # SAVE
-#     if request.method == "POST":
-#         data = request.get_json()
-#         if not data:
-#             return jsonify({"error": "Invalid JSON"}), 400
-
-#         with open(file_path, "r") as f:
-#             user_data = json.load(f)
-
-#         user_data["game_data"] = data
-
-#         with open(file_path, "w") as f:
-#             json.dump(user_data, f, indent=4)
-
-#         return jsonify({"message": "Saved"}), 200
-
 @app.route("/api/construct", methods=["OPTIONS","GET","POST"]) # type: ignore
 def api_construct():
     if request.method == "OPTIONS":
@@ -220,53 +183,44 @@ def api_construct():
     if request.headers.get("X-Secret-Key") != os.getenv("PYLOOP_TOKEN"):
         return jsonify({"error": "Unauthorized"}), 401
 
+    if 'user' not in session:
+        return jsonify({"error": "Not logged in"}), 401
+
+    file_path = f"saves/{session['user']}.json"
+
+    if not os.path.exists(file_path):
+        return jsonify({"error": "User not found"}), 404
+
+    # LOAD
     if request.method == "GET":
-        users = os.listdir("saves")
-        for user in users:
-            try:
-                with open(f"saves/{user}", "r") as f:
-                    user_data = json.load(f)
-                    if user_data.get("ip") == request.remote_addr:
-                        return jsonify(user_data.get("game_data", {"loc": 0, "click_value": 1, "loc_per_sec": 0, "multiplier": 1, "u1_price": 25, "u1_owned": 1, "u2_owned": 1, "u2_price": 120})), 200
-            except Exception as e:
-                with open("error_log.txt", "a") as f:
-                    f.write(f"app.py - [{datetime.now().isoformat()}] - Error reading save file for {user}: {str(e)}\n")
-                return jsonify({"error": "Failed to read data"}), 500
+        with open(file_path, "r") as f:
+            user_data = json.load(f)
+        return jsonify(user_data.get("game_data", {
+            "loc": 0,
+            "click_value": 1,
+            "loc_per_sec": 0,
+            "multiplier": 1,
+            "u1_price": 25,
+            "u1_owned": 1,
+            "u2_owned": 1,
+            "u2_price": 120
+        })), 200
 
-        return jsonify({
-            "game_data": {
-                "loc": 0,
-                "click_value": 1,
-                "loc_per_sec": 0,
-                "multiplier": 1,
-                "u1_price": 25,
-                "u1_owned": 1,
-                "u2_owned": 1,
-                "u2_price": 120
-            }}), 200
-
+    # SAVE
     if request.method == "POST":
         data = request.get_json()
-
         if not data:
             return jsonify({"error": "Invalid JSON"}), 400
 
-        users = os.listdir("saves")
-        for user in users:
-            try:
-                with open(f"saves/{user}", "r") as f:
-                    user_data = json.load(f)
-                    if user_data.get("ip") == request.remote_addr:
-                        user_data["game_data"] = data
-                        with open(f"saves/{user}", "w") as f2:
-                            json.dump(user_data, f2, indent=4)
-                        return jsonify({"message": "Data saved successfully"}), 200
-            except Exception as e:
-                with open("error_log.txt", "a") as f:
-                    f.write(f"app.py - [{datetime.now().isoformat()}] - Error updating save file for {user}: {str(e)}\n")
-                return jsonify({"error": "Failed to save data"}), 500
+        with open(file_path, "r") as f:
+            user_data = json.load(f)
 
-        return jsonify({"message": "Data saved successfully"}), 200
+        user_data["game_data"] = data
+
+        with open(file_path, "w") as f:
+            json.dump(user_data, f, indent=4)
+
+        return jsonify({"message": "Saved"}), 200
 
 # Run the app
 
