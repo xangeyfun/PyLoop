@@ -1,16 +1,41 @@
 {% extends "base.html" %}
 
-{% block title %}Profile {{ data.username }}{% endblock %}
+{% block title %}Profile - {{ data.username }}{% endblock %}
 
 {% block content %}
-<section class="profile-section">
-    <h2>{{ data.username }}'s Profile</h2>
-    <div class="profile-info">
-        <p><strong>Lines of Code:</strong> {{ game_data.loc }}</p>
+<div class="main-container">
+    <section class="profile-header">
+        <div class="profile-avatar">{{ data.username[0]|upper }}</div>
+        <h1>{{ data.username }}</h1>
+        <p class="join-date">Player</p>
+    </section>
+
+    <div class="profile-grid">
+        <div class="profile-card">
+            <h3>Lines of Code</h3>
+            <div class="stat-value">{{ game_data.loc|default(0) }}</div>
+            <p class="stat-label">Total code written</p>
+        </div>
+
+        <div class="profile-card">
+            <h3>Click Power</h3>
+            <div class="stat-value">{{ game_data.click_value|default(1) }}</div>
+            <p class="stat-label">LOC per click</p>
+        </div>
+
+        <div class="profile-card">
+            <h3>Auto Generation</h3>
+            <div class="stat-value">{{ game_data.loc_per_sec|default(0) }}</div>
+            <p class="stat-label">LOC per second</p>
+        </div>
     </div>
-    <p>Your secret token (DO NOT SHARE THIS):</p>
-    <span class="spoiler" onclick="this.classList.toggle('revealed')">
-    {{ data.token }}
-    </span>
-</section>
+
+    <div class="token-section">
+        <p>Your secret token (click to reveal):</p>
+        <span class="spoiler" onclick="this.classList.toggle('revealed')">{{ data.token }}</span>
+        <div class="warning-box">
+            <p>DO NOT share this token with anyone. It can be used to access your account.</p>
+        </div>
+    </div>
+</div>
 {% endblock %}

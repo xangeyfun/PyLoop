@@ -3,9 +3,10 @@
 {% block title %}Idle Clicker Game{% endblock %}
 
 {% block content %}
+<div class="main-container">
 <section class="hero">
-    <img src="/static/images/favicon.png" width="128px" height="128px">
-    <span class="hero-span"><h1>PyLoop</h1></span>
+    <img src="/static/images/favicon.png" class="hero-image">
+    <h1>PyLoop</h1>
     <p>
         A modern idle clicker game built with Construct 3 and Flask.
         Click, upgrade, and watch your code knowledge grow while playing.
@@ -13,8 +14,54 @@
 
     <div class="hero-buttons">
         <a href="/game" class="btn btn-primary">Play Game</a>
-        <a href="/github" class="btn btn-secondary" target="_blank">View on GitHub</a>
+        <a href="/features" class="btn btn-secondary">Learn More</a>
+        <a href="/github" class="btn btn-secondary" target="_blank">GitHub</a>
     </div>
 </section>
 
+<section class="content-section">
+    <h2>How to Play</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Click to Code</h3>
+            <p>Start your journey by clicking to generate lines of code. Each click adds to your growing codebase and earns you points.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Purchase Upgrades</h3>
+            <p>Use your hard-earned code to buy upgrades. From keyboard shortcuts to AI assistants, there are many ways to boost your productivity.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Automate Your Progress</h3>
+            <p>Let your automated scripts do the work while you're away. Watch your code empire grow even when you're not playing.</p>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Why Play PyLoop?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Free to Play</h3>
+            <p>No microtransactions or pay-to-win mechanics. Everything can be earned through gameplay.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Instant Progress</h3>
+            <p>Your game saves automatically to our servers. Pick up right where you left off on any device.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Open Source</h3>
+            <p>PyLoop is fully open source. Fork it, modify it, or contribute on GitHub.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <h2>Ready to Start Coding?</h2>
+    <p>Join thousands of players and build your code empire today.</p>
+    <div class="hero-buttons">
+        <a href="/register" class="btn btn-primary">Create Account</a>
+        <a href="/game" class="btn btn-secondary">Play as Guest</a>
+    </div>
+</section>
+</div>
 {% endblock %}

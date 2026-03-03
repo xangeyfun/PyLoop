@@ -31,7 +31,7 @@ def remove_trailing_slash():
 
 @app.before_request
 def ip_restrict():
-    if request.remote_addr not in ["127.0.0.1"] and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
+    if request.remote_addr not in ["127.0.0.1", "192.168.178.1"] and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
         abort(401)
 
 # pages
@@ -84,6 +84,14 @@ def logout():
 def github():
     return redirect("https://github.com/xangeyfun/PyLoop")
 
+@app.route("/features", methods=["GET"])
+def features():
+    return render_template("features.html"), 200
+
+@app.route("/contact", methods=["GET"])
+def contact():
+    return render_template("contact.html"), 200
+
 @app.route("/profile/<user>", methods=["GET"])
 def profile(user):
     if 'user' not in session:
@@ -127,7 +135,7 @@ def api_register():
 
     try:
         with open(f"saves/{username}.json", "w") as f:
-            json.dump({"username": username, "password": generate_password_hash(password), "token": secrets.token_hex(3),
+            json.dump({"username": username, "password": generate_password_hash(password), "token": secrets.token_hex(8),
             "game_data": {
                 "loc": 0,
                 "click_value": 1,
