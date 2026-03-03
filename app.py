@@ -27,9 +27,11 @@ def remove_trailing_slash():
     if request.path != '/' and request.path.endswith('/'):
         return redirect(request.path[:-1])
 
+# Temporary ip restrction for testing
+
 @app.before_request
 def ip_restrict():
-    if request.remote_addr not in []:
+    if request.remote_addr not in ["104.28.158.17"]:
         abort(401)
 
 @app.after_request
