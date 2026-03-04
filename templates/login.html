@@ -3,17 +3,15 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="main-container">
 <section class="auth-section">
     <h2>Login to PyLoop</h2>
     <form action="/api/login" method="POST" class="auth-form">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required minlength="3" placeholder="Enter your username">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required minlength="6" placeholder="Enter your password">
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required minlength="3">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required minlength="6">
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
     <p class="auth-link">Don't have an account? <a href="/register">Register here</a>.</p>
 </section>
-</div>
 {% endblock %}

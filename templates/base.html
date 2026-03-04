@@ -35,10 +35,8 @@
             </div>
 
             <div class="nav-right">
-                <a href="/features">Features</a>
-                <a href="/contact">Contact</a>
                 {% if session.user %}
-                <a href="/profile/{{ session.user }}">{{ session.user }}</a>
+                <span>{{ session.user }}</span>
                 <a href="/logout">Logout</a>
                 {% else %}
                     <a href="/register">Register</a>
@@ -47,14 +45,6 @@
             </div>
         </nav>
         {% block content %}{% endblock %}
-        <footer class="site-footer">
-            <p>&copy; 2024 PyLoop. Built with Flask and Construct 3.</p>
-            <div class="footer-links">
-                <a href="/features">Features</a>
-                <a href="/contact">Contact</a>
-                <a href="/github" target="_blank">GitHub</a>
-            </div>
-        </footer>
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </body>
 </html>
