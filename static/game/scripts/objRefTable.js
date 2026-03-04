@@ -79,12 +79,22 @@ self.C3_JsPropNameTable = [
 	{Test: 0},
 	{Text2: 0},
 	{SubmitButton: 0},
+	{Upgrade3: 0},
+	{Upgrade3Text: 0},
+	{Upgrade3Price: 0},
+	{LOCUpgrade1: 0},
+	{LOCUpgrade1Price: 0},
+	{LOCUpgrade1Text: 0},
+	{Sprite: 0},
+	{Text3: 0},
 	{LOC: 0},
 	{ClickValue: 0},
 	{LOCPerSecond: 0},
 	{Multiplier: 0},
 	{Upgrade1Owned: 0},
 	{Upgrade2Owned: 0},
+	{Upgrade3Owned: 0},
+	{LOCUpgrade1Owned: 0},
 	{GameLoaded: 0}
 ];
 
@@ -112,5 +122,13 @@ self.InstanceType = {
 	EnterToken: class extends self.ITextInputInstance {},
 	Test: class extends self.ITextInstance {},
 	Text2: class extends self.ITextInstance {},
-	SubmitButton: class extends self.ISpriteInstance {}
+	SubmitButton: class extends self.ISpriteInstance {},
+	Upgrade3: class extends self.ISpriteInstance {},
+	Upgrade3Text: class extends self.ITextInstance {},
+	Upgrade3Price: class extends self.ITextInstance {},
+	LOCUpgrade1: class extends self.ISpriteInstance {},
+	LOCUpgrade1Price: class extends self.ITextInstance {},
+	LOCUpgrade1Text: class extends self.ITextInstance {},
+	Sprite: class extends self.ISpriteInstance {},
+	Text3: class extends self.ITextInstance {}
 }

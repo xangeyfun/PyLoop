@@ -118,7 +118,11 @@ def api_register():
                 "u1_price": 25,
                 "u1_owned": 1,
                 "u2_owned": 1,
-                "u2_price": 120
+                "u2_price": 120,
+                "u3_owned": 1,
+                "u3_price": 400,
+                "loc_u1_owned": 1,
+                "loc_u1_price": 75
             }}, f, indent=4)
     except Exception as e:
         with open("error_log.txt", "a") as f:
@@ -185,7 +189,11 @@ def api_construct():
             "u1_price": 25,
             "u1_owned": 1,
             "u2_owned": 1,
-            "u2_price": 120
+            "u2_price": 120,
+            "u3_owned": 1,
+            "u3_price": 400,
+            "loc_u1_owned": 1,
+            "loc_u1_price": 75
         })), 200
 
     # SAVE
