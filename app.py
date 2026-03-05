@@ -29,10 +29,10 @@ def remove_trailing_slash():
 
 # Temporary ip restrction for testing
 
-@app.before_request
-def ip_restrict():
-    if request.remote_addr not in ["127.0.0.1", "192.168.178.1", "104.28.163.189", "104.28.251.181"] and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
-        abort(401)
+#@app.before_request
+#def ip_restrict():
+#    if request.remote_addr not in ["127.0.0.1", "192.168.178.1"] and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
+#        abort(401)
 
 # pages
 
