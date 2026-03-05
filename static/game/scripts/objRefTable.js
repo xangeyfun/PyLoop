@@ -87,6 +87,12 @@ self.C3_JsPropNameTable = [
 	{LOCUpgrade1Text: 0},
 	{Sprite: 0},
 	{Text3: 0},
+	{LOCUpgrade2: 0},
+	{LOCUpgrade2Price: 0},
+	{LOCUpgrade2Text: 0},
+	{LOCUpgrade3: 0},
+	{LOCUpgrade3Price: 0},
+	{LOCUpgrade3Text: 0},
 	{LOC: 0},
 	{ClickValue: 0},
 	{LOCPerSecond: 0},
@@ -95,6 +101,8 @@ self.C3_JsPropNameTable = [
 	{Upgrade2Owned: 0},
 	{Upgrade3Owned: 0},
 	{LOCUpgrade1Owned: 0},
+	{LOCUpgrade2Owned: 0},
+	{LOCUpgrade3Owned: 0},
 	{GameLoaded: 0}
 ];
 
@@ -130,5 +138,11 @@ self.InstanceType = {
 	LOCUpgrade1Price: class extends self.ITextInstance {},
 	LOCUpgrade1Text: class extends self.ITextInstance {},
 	Sprite: class extends self.ISpriteInstance {},
-	Text3: class extends self.ITextInstance {}
+	Text3: class extends self.ITextInstance {},
+	LOCUpgrade2: class extends self.ISpriteInstance {},
+	LOCUpgrade2Price: class extends self.ITextInstance {},
+	LOCUpgrade2Text: class extends self.ITextInstance {},
+	LOCUpgrade3: class extends self.ISpriteInstance {},
+	LOCUpgrade3Price: class extends self.ITextInstance {},
+	LOCUpgrade3Text: class extends self.ITextInstance {}
 }

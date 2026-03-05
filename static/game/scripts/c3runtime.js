@@ -1318,7 +1318,11 @@ self.C3_ExpressionFuncs = [
 			const v9 = p._GetNode(9).GetVar();
 			const v10 = p._GetNode(10).GetVar();
 			const v11 = p._GetNode(11).GetVar();
-			return () => (and((and((and((and((and((and((and((and((and((and((and((and("{\"loc\":", v0.GetValue()) + ",\"click_value\":"), v1.GetValue()) + ",\"loc_per_sec\":"), v2.GetValue()) + ",\"multiplier\":"), v3.GetValue()) + ",\"u1_price\":"), v4.GetValue()) + ",\"u1_owned\":"), v5.GetValue()) + ",\"u2_owned\":"), v6.GetValue()) + ",\"u2_price\":"), v7.GetValue()) + ",\"u3_owned\":"), v8.GetValue()) + ",\"u3_price\":"), v9.GetValue()) + ",\"loc_u1_owned\":"), v10.GetValue()) + ",\"loc_u1_price\":"), v11.GetValue()) + "}");
+			const v12 = p._GetNode(12).GetVar();
+			const v13 = p._GetNode(13).GetVar();
+			const v14 = p._GetNode(14).GetVar();
+			const v15 = p._GetNode(15).GetVar();
+			return () => (and((and((and((and((and((and((and((and((and((and((and((and((and((and((and((and("{\"loc\":", v0.GetValue()) + ",\"click_value\":"), v1.GetValue()) + ",\"loc_per_sec\":"), v2.GetValue()) + ",\"multiplier\":"), v3.GetValue()) + ",\"u1_price\":"), v4.GetValue()) + ",\"u1_owned\":"), v5.GetValue()) + ",\"u2_owned\":"), v6.GetValue()) + ",\"u2_price\":"), v7.GetValue()) + ",\"u3_owned\":"), v8.GetValue()) + ",\"u3_price\":"), v9.GetValue()) + ",\"loc_u1_owned\":"), v10.GetValue()) + ",\"loc_u1_price\":"), v11.GetValue()) + ",\"loc_u2_owned\":"), v12.GetValue()) + ",\"loc_u2_price\":"), v13.GetValue()) + ",\"loc_u3_owned\":"), v14.GetValue()) + ",\"loc_u3_price\":"), v15.GetValue()) + "}");
 		},
 		() => "POST",
 		() => 614.998899,
@@ -1418,6 +1422,14 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
+			return () => (and("Functions (", (v0.GetValue() - 1)) + (")").toString());
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (and("AI code (", (v0.GetValue() - 1)) + (")").toString());
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
 			return () => (and("", v0.GetValue()) + (" LOC per click").toString());
 		},
 		() => 0.1432,
@@ -1456,7 +1468,19 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => Math.floor((75 * Math.pow(v0.GetValue(), 1.18)));
-		}
+		},
+		() => "LOC Upgrade 2",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => Math.floor((900 * Math.pow(v0.GetValue(), 1.18)));
+		},
+		() => 5,
+		() => "LOC Upgrade 3",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => Math.floor((12000 * Math.pow(v0.GetValue(), 1.18)));
+		},
+		() => 40
 ];
 
 

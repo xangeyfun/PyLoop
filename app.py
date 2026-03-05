@@ -1,8 +1,8 @@
 from flask import Flask, redirect, jsonify, request, render_template, session, flash, send_from_directory, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.middleware.proxy_fix import ProxyFix
-from datetime import datetime
 from dotenv import load_dotenv
+from datetime import datetime
 import secrets
 import json
 import os
@@ -31,7 +31,7 @@ def remove_trailing_slash():
 
 @app.before_request
 def ip_restrict():
-    if request.remote_addr not in ["127.0.0.1", "192.168.178.1", "104.28.163.191"] and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
+    if request.remote_addr not in ["127.0.0.1", "192.168.178.1", "104.28.163.189", "104.28.251.181"] and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
         abort(401)
 
 # pages
@@ -122,7 +122,11 @@ def api_register():
                 "u3_owned": 1,
                 "u3_price": 400,
                 "loc_u1_owned": 1,
-                "loc_u1_price": 75
+                "loc_u1_price": 75,
+                "loc_u2_owned": 1,
+                "loc_u2_price": 900,
+                "loc_u3_owned": 1,
+                "loc_u3_price": 12000
             }}, f, indent=4)
     except Exception as e:
         with open("error_log.txt", "a") as f:
@@ -193,7 +197,11 @@ def api_construct():
             "u3_owned": 1,
             "u3_price": 400,
             "loc_u1_owned": 1,
-            "loc_u1_price": 75
+            "loc_u1_price": 75,
+            "loc_u2_owned": 1,
+            "loc_u2_price": 900,
+            "loc_u3_owned": 1,
+            "loc_u3_price": 12000
         })), 200
 
     # SAVE
