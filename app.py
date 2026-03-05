@@ -19,6 +19,9 @@ app.config.update(
     SESSION_COOKIE_SAMESITE='Lax'
 )
 os.makedirs("saves", exist_ok=True)
+with open("ips.json", "r") as f:
+    ips = json.load(f)
+
 
 # middleware
 
@@ -31,7 +34,7 @@ def remove_trailing_slash():
 
 #@app.before_request
 #def ip_restrict():
-#    if request.remote_addr not in ["127.0.0.1", "192.168.178.1"] and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
+#    if request.remote_addr not in ips and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
 #        abort(401)
 
 # pages
