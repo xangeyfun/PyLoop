@@ -57,7 +57,7 @@ def home():
                 session['connected'] = True
 
             except Exception as e:
-                with open("error_log.txt", "a") as f:
+                with open("error_log.txt", "r") as f:
                     f.write(f"app.py - [{datetime.now().isoformat()}] - Error updating IP for {session['user']}: {str(e)}\n")
 
     return render_template("index.html"), 200
@@ -112,7 +112,7 @@ def api_register():
 
     try:
         with open(f"saves/{username}.json", "w") as f:
-            json.dump({"username": username, "password": generate_password_hash(password), "token": secrets.token_hex(8),
+            json.dump({"username": username, "password": generate_password_hash(password), "token": secrets.token_hex(8), "created_at": datetime.now().isoformat(),
             "game_data": {
                 "loc": 0,
                 "click_value": 1,
@@ -157,6 +157,9 @@ def api_login():
             data = json.load(f)
             if check_password_hash(data["password"], password):
                 session['user'] = username
+                data['last_login'] = datetime.now().isoformat()
+                with open(f"saves/{username}.json", "w") as f:
+                    json.dump(data, f, indent=4)
                 flash("Logged in successfully!", "success")
                 return redirect("/")
             else:
