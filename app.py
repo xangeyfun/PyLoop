@@ -57,7 +57,7 @@ def home():
                 session['connected'] = True
 
             except Exception as e:
-                with open("error_log.txt", "r") as f:
+                with open("error_log.txt", "a") as f:
                     f.write(f"app.py - [{datetime.now().isoformat()}] - Error updating IP for {session['user']}: {str(e)}\n")
 
     return render_template("index.html"), 200
