@@ -180,8 +180,8 @@ body {
     font-size: 2.2rem;
     margin-bottom: 40px;
     font-weight: 600;
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .features h2.visible {
@@ -202,8 +202,8 @@ body {
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.06);
     transition: 0.3s ease;
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .feature-card.visible {
@@ -250,8 +250,8 @@ body {
     font-size: 2.2rem;
     margin-bottom: 45px;
     font-weight: 600;
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .how-to-play h2.visible {
@@ -271,8 +271,8 @@ body {
     max-width: 280px;
     text-align: center;
     position: relative;
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .step.visible {
@@ -314,8 +314,8 @@ body {
     text-align: center;
     max-width: 600px;
     margin: 0 auto;
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .cta.visible {
