@@ -1424,42 +1424,6 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => (and("", v0.GetValue()) + (" LOC").toString());
 		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("", v0.GetValue()) + (" LOC/sec").toString());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and("", v0.GetValue());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("Auto Indentation (", (v0.GetValue() - 1)) + (")").toString());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("StackOverflow (", (v0.GetValue() - 1)) + (")").toString());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("AI Autocomplete (", (v0.GetValue() - 1)) + (")").toString());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("For loop (", (v0.GetValue() - 1)) + (")").toString());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("Functions (", (v0.GetValue() - 1)) + (")").toString());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("AI code (", (v0.GetValue() - 1)) + (")").toString());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("", v0.GetValue()) + (" LOC per click").toString());
-		},
 		() => 0.1432,
 		() => 0.1,
 		() => 0.1532,
