@@ -12,7 +12,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.AJAX,
 		C3.Plugins.Json,
 		C3.Plugins.TextBox,
-		C3.Plugins.System.Cnds.IsGroupActive,
+		C3.Plugins.Touch,
 		C3.Plugins.System.Cnds.Every,
 		C3.Plugins.System.Cnds.CompareBoolVar,
 		C3.Plugins.System.Acts.SaveStateJSON,
@@ -28,8 +28,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Json.Exps.Get,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.AJAX.Cnds.OnError,
+		C3.JavaScriptInEvents.EventSheet1_Event4_Act1,
 		C3.JavaScriptInEvents.EventSheet1_Event5_Act1,
-		C3.JavaScriptInEvents.EventSheet1_Event6_Act1,
 		C3.Plugins.System.Acts.AddVar,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.Sprite.Acts.StopAnim,
@@ -45,6 +45,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Mouse.Exps.Y,
 		C3.Plugins.Text.Acts.SetAngle,
 		C3.Plugins.System.Exps.random,
+		C3.Plugins.Touch.Cnds.OnTapGestureObject,
+		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Keyboard.Cnds.OnKey,
 		C3.Plugins.System.Cnds.Compare,
 		C3.Plugins.System.Acts.SubVar,
@@ -93,6 +95,7 @@ self.C3_JsPropNameTable = [
 	{LOCUpgrade3: 0},
 	{LOCUpgrade3Price: 0},
 	{LOCUpgrade3Text: 0},
+	{Touch: 0},
 	{LOC: 0},
 	{ClickValue: 0},
 	{LOCPerSecond: 0},
@@ -144,5 +147,6 @@ self.InstanceType = {
 	LOCUpgrade2Text: class extends self.ITextInstance {},
 	LOCUpgrade3: class extends self.ISpriteInstance {},
 	LOCUpgrade3Price: class extends self.ITextInstance {},
-	LOCUpgrade3Text: class extends self.ITextInstance {}
+	LOCUpgrade3Text: class extends self.ITextInstance {},
+	Touch: class extends self.IInstance {}
 }
