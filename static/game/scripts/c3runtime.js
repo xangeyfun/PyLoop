@@ -1443,7 +1443,7 @@ self.C3_ExpressionFuncs = [
 		() => 200,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => Math.floor((15 * Math.pow(v0.GetValue(), 1.18)));
+			return () => Math.floor((25 * Math.pow(v0.GetValue(), 1.18)));
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
