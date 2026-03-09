@@ -17,11 +17,11 @@
         
         <div class="profile-stats">
             <div class="stat-box">
-                <span class="stat-value">{{ "{:,}".format(game_data.loc) }}</span>
+                <span class="stat-value">{{ game_data.loc | format_number }}</span>
                 <span class="stat-label">Total LOC</span>
             </div>
             <div class="stat-box">
-                <span class="stat-value">{{ game_data.loc_per_sec }}</span>
+                <span class="stat-value">{{ game_data.loc_per_sec | format_number }}</span>
                 <span class="stat-label">LOC/sec</span>
             </div>
             <div class="stat-box">

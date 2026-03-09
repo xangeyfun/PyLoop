@@ -30,6 +30,18 @@ def remove_trailing_slash():
     if request.path != '/' and request.path.endswith('/'):
         return redirect(request.path[:-1])
 
+def format_number(num):
+    if num >= 1_000_000_000_000:
+        return f"{num / 1_000_000_000_000:.1f}T"
+    if num >= 1_000_000_000:
+        return f"{num / 1_000_000_000:.1f}B"
+    if num >= 1_000_000:
+        return f"{num / 1_000_000:.1f}M"
+    if num >= 1_000:
+        return f"{num / 1_000:.1f}K"
+    return str(num)
+app.jinja_env.filters['format_number'] = format_number
+
 # Temporary ip restrction for testing
 
 #@app.before_request
