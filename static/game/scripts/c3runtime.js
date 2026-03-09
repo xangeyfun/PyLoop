@@ -1407,6 +1407,10 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("loc_u3_price");
 		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("username");
+		},
 		() => 1,
 		p => {
 			const v0 = p._GetNode(0).GetVar();

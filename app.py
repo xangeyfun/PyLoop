@@ -191,24 +191,27 @@ def api_construct():
     if request.method == "GET":
         with open(file_path, "r") as f:
             user_data = json.load(f)
-        return jsonify(user_data.get("game_data", {
-            "loc": 0,
-            "click_value": 1,
-            "loc_per_sec": 0,
-            "multiplier": 1,
-            "u1_price": 25,
-            "u1_owned": 1,
-            "u2_owned": 1,
-            "u2_price": 120,
-            "u3_owned": 1,
-            "u3_price": 400,
-            "loc_u1_owned": 1,
-            "loc_u1_price": 75,
-            "loc_u2_owned": 1,
-            "loc_u2_price": 900,
-            "loc_u3_owned": 1,
-            "loc_u3_price": 12000
-        })), 200
+            game_data = user_data.get("game_data", {
+                "username": user_data["username"],
+                "loc": 0,
+                "click_value": 1,
+                "loc_per_sec": 0,
+                "multiplier": 1,
+                "u1_price": 25,
+                "u1_owned": 1,
+                "u2_owned": 1,
+                "u2_price": 120,
+                "u3_owned": 1,
+                "u3_price": 400,
+                "loc_u1_owned": 1,
+                "loc_u1_price": 75,
+                "loc_u2_owned": 1,
+                "loc_u2_price": 900,
+                "loc_u3_owned": 1,
+                "loc_u3_price": 12000
+            })
+            game_data["username"] = user_data["username"]
+            return jsonify(game_data), 200
 
     # SAVE
     if request.method == "POST":
