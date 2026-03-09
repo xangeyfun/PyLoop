@@ -4,12 +4,12 @@ const scriptsInEvents = {
 
 	async EventSheet1_Event4_Act1(runtime, localVars)
 	{
-		alert("Connection to the save server failed. The game is running in offline mode, so progress will not be saved. Create or log in to your account at https://pyloop.nexohub.ddns.net/ to enable saving.");
+		alert("Oops! Can't save right now, but you can still play.\n\nTo save your progress, create an account or log in here:\nhttps://pyloop.nexohub.ddns.net/");
 	},
 
 	async EventSheet1_Event5_Act1(runtime, localVars)
 	{
-		alert("Connection to the save server failed. The game is running in offline mode, so progress will not be saved. Create or log in to your account at https://pyloop.nexohub.ddns.net/ to enable saving.");
+		alert("Oops! Can't save right now, but you can still play.\n\nTo save your progress, create an account or log in here:\nhttps://pyloop.nexohub.ddns.net/");
 	},
 
 	async EventSheet1_Event8_Act1(runtime, localVars)
