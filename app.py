@@ -42,13 +42,6 @@ def format_number(num):
     return str(num)
 app.jinja_env.filters['format_number'] = format_number
 
-# Temporary ip restrction for testing
-
-#@app.before_request
-#def ip_restrict():
-#    if request.remote_addr not in ips and request.path not in ["/", "/github"] and not request.path.startswith("/static/"):
-#        abort(401)
-
 # pages
 
 @app.route("/", methods=["GET"])
