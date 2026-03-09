@@ -36,7 +36,7 @@
 
             <div class="nav-right">
                 {% if session.user %}
-                <span>{{ session.user }}</span>
+                <a href="/profile">{{ session.user }}</a>
                 <a href="/logout">Logout</a>
                 {% else %}
                     <a href="/register">Register</a>

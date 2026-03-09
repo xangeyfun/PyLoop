@@ -4,7 +4,7 @@
 
 {% block content %}
 <section class="hero">
-    <img src="/static/images/favicon.png" width="128px" height="128px">
+    <img src="/static/images/favicon.png" width="128px" height="128px" class="hero-icon">
     <span class="hero-span"><h1>PyLoop</h1></span>
     <p>
         A modern idle clicker game built with Construct 3 and Flask.
@@ -17,4 +17,58 @@
     </div>
 </section>
 
+<section class="features">
+    <h2>Why Play PyLoop?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Fun</h3>
+            <p>Jump right in and start clicking. No tutorials needed - the gameplay is intuitive and addictive from the start.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h3>Track Progress</h3>
+            <p>Save your progress automatically. Come back anytime and pick up right where you left off.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h3>Endless Upgrades</h3>
+            <p>Unlock dozens of upgrades and power-ups. There's always something new to discover.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <h3>Free to Play</h3>
+            <p>No paywalls, no ads, no catches. Just pure idle gaming pleasure.</p>
+        </div>
+    </div>
+</section>
+
+<section class="how-to-play">
+    <h2>How to Play</h2>
+    <div class="steps">
+        <div class="step">
+            <span class="step-number">1</span>
+            <h3>Click to Earn</h3>
+            <p>Click the main button to generate code points. Each click builds your knowledge base.</p>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span>
+            <h3>Buy Upgrades</h3>
+            <p>Use your points to purchase upgrades that increase your clicking power and passive income.</p>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span>
+            <h3>Unlock Achievements</h3>
+            <p>Reach milestones and unlock achievements. Compete with yourself to beat your high scores.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <h2>Ready to Start?</h2>
+    <p>Join thousands of players who are already building their code empire.</p>
+    <div class="hero-buttons">
+        <a href="/game" class="btn btn-primary">Start Playing Now</a>
+    </div>
+</section>
 {% endblock %}

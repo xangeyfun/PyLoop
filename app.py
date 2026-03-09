@@ -87,6 +87,75 @@ def logout():
 def github():
     return redirect("https://github.com/xangeyfun/PyLoop")
 
+@app.route("/profile", methods=["GET"])
+def profile():
+    if 'user' not in session:
+        flash("Please log in to view your profile.", "error")
+        return redirect("/login")
+    
+    username = session['user']
+    
+    if not os.path.exists(f"saves/{username}.json"):
+        flash("Profile not found.", "error")
+        return redirect("/")
+    
+    with open(f"saves/{username}.json", "r") as f:
+        user_data = json.load(f)
+    
+    created_at = user_data.get("created_at", "Unknown")
+    if created_at != "Unknown":
+        created_at = datetime.fromisoformat(created_at).strftime("%B %d, %Y")
+    
+    game_data = user_data.get("game_data", {})
+    
+    return render_template("profile.html", username=username, created_at=created_at, game_data=game_data), 200
+
+@app.route("/profile/reset", methods=["POST"])
+def profile_reset():
+    if 'user' not in session:
+        flash("Please log in to reset your progress.", "error")
+        return redirect("/login")
+    
+    username = session['user']
+    
+    if not os.path.exists(f"saves/{username}.json"):
+        flash("Profile not found.", "error")
+        return redirect("/")
+    
+    try:
+        with open(f"saves/{username}.json", "r") as f:
+            user_data = json.load(f)
+        
+        user_data["game_data"] = {
+            "loc": 0,
+            "click_value": 1,
+            "loc_per_sec": 0,
+            "multiplier": 1,
+            "u1_price": 25,
+            "u1_owned": 1,
+            "u2_owned": 1,
+            "u2_price": 120,
+            "u3_owned": 1,
+            "u3_price": 400,
+            "loc_u1_owned": 1,
+            "loc_u1_price": 75,
+            "loc_u2_owned": 1,
+            "loc_u2_price": 900,
+            "loc_u3_owned": 1,
+            "loc_u3_price": 12000
+        }
+        
+        with open(f"saves/{username}.json", "w") as f:
+            json.dump(user_data, f, indent=4)
+        
+        flash("Progress reset successfully!", "success")
+    except Exception as e:
+        with open("error_log.txt", "a") as f:
+            f.write(f"app.py - [{datetime.now().isoformat()}] - Error resetting progress for {username}: {str(e)}\n")
+        flash("An error occurred while resetting your progress.", "error")
+    
+    return redirect("/profile")
+
 # API
 
 @app.route("/api/register", methods=["POST"]) # type: ignore

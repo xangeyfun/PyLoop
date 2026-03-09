@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - PyLoop{% endblock %}
+
+{% block content %}
+<section class="profile-section">
+    <h1>Profile</h1>
+    
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar">{{ session.user[0]|upper }}</div>
+            <div class="profile-info">
+                <h2>{{ username }}</h2>
+                <p class="member-since">Member since {{ created_at }}</p>
+            </div>
+        </div>
+        
+        <div class="profile-stats">
+            <div class="stat-box">
+                <span class="stat-value">{{ "{:,}".format(game_data.loc) }}</span>
+                <span class="stat-label">Total LOC</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">{{ game_data.loc_per_sec }}</span>
+                <span class="stat-label">LOC/sec</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">{{ game_data.multiplier }}x</span>
+                <span class="stat-label">Multiplier</span>
+            </div>
+        </div>
+        
+        <div class="profile-upgrades">
+            <h3>Upgrades Owned</h3>
+            <div class="upgrades-grid">
+                <div class="upgrade-item">
+                    <span class="upgrade-name">Auto Indentation</span>
+                    <span class="upgrade-count">{{ game_data.u1_owned-1 }}</span>
+                </div>
+                <div class="upgrade-item">
+                    <span class="upgrade-name">Functions</span>
+                    <span class="upgrade-count">{{ game_data.loc_u2_owned-1 }}</span>
+                </div>
+                <div class="upgrade-item">
+                    <span class="upgrade-name">AI Autocomplete</span>
+                    <span class="upgrade-count">{{ game_data.u3_owned-1 }}</span>
+                </div>
+                <div class="upgrade-item">
+                    <span class="upgrade-name">For loop</span>
+                    <span class="upgrade-count">{{ game_data.loc_u1_owned-1 }}</span>
+                </div>
+                <div class="upgrade-item">
+                    <span class="upgrade-name">StackOverflow</span>
+                    <span class="upgrade-count">{{ game_data.u2_owned-1 }}</span>
+                </div>
+                <div class="upgrade-item">
+                    <span class="upgrade-name">AI code</span>
+                    <span class="upgrade-count">{{ game_data.loc_u3_owned-1 }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-actions">
+            <h3>Danger Zone</h3>
+            <p>Resetting your progress will permanently delete all your game data. This action cannot be undone.</p>
+            <form method="POST" action="/profile/reset" onsubmit="return confirm('Are you sure you want to reset all progress? This cannot be undone!');">
+                <button type="submit" class="btn btn-danger">Reset Progress</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
