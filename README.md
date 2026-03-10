@@ -26,19 +26,13 @@ Edit `.env` and add a secret key:
 TOKEN=your-secret-key-here
 ```
 
-### 3. Initialize empty data files
-
-```bash
-echo "[]" > ips.json
-```
-
-### 4. Install dependencies
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Run the server
+### 4. Run the server
 
 Development:
 ```bash
@@ -50,7 +44,7 @@ Production (gunicorn):
 gunicorn -w 2 -b 127.0.0.1:6000 app:app
 ```
 
-The game will be available at `http://localhost:5000` (or port 6000 for gunicorn).
+The game will be available at `http://localhost:6000`.
 
 ---
 
@@ -69,4 +63,4 @@ Flask + Construct 3
 
 ---
 
-MIT License
+[MIT License](LICENSE)

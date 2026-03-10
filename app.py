@@ -19,8 +19,9 @@ app.config.update(
     SESSION_COOKIE_SAMESITE='Lax'
 )
 os.makedirs("saves", exist_ok=True)
-with open("ips.json", "r") as f:
-    ips = json.load(f)
+if os.path.exists("ips.json"):
+    with open("ips.json", "r") as f:
+        ips = json.load(f)
 
 
 # middleware
