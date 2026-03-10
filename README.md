@@ -2,7 +2,7 @@
 
 > Coding-themed idle clicker game built with Flask and Construct 3.
 
-🌐 Website: [https://pyloop.nexohub.ddns.net/](https://pyloop.nexohub.ddns.net/)
+🌐 Website: [https://pyloop.xangey.dev/](https://pyloop.xangey.dev/)
 
 PyLoop is an idle clicker game where players earn **LOC** by clicking or by purchasing automated upgrades that generate progress over time.
 

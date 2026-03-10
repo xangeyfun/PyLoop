@@ -4,12 +4,12 @@ const scriptsInEvents = {
 
 	async EventSheet1_Event4_Act1(runtime, localVars)
 	{
-		alert("Oops! Can't save right now, but you can still play.\n\nTo save your progress, create an account or log in here:\nhttps://pyloop.nexohub.ddns.net/");
+		alert("Oops! Can't save right now, but you can still play.\n\nTo save your progress, create an account or log in here:\nhttps://pyloop.xangey.dev/");
 	},
 
 	async EventSheet1_Event5_Act1(runtime, localVars)
 	{
-		alert("Oops! Can't save right now, but you can still play.\n\nTo save your progress, create an account or log in here:\nhttps://pyloop.nexohub.ddns.net/");
+		alert("Oops! Can't save right now, but you can still play.\n\nTo save your progress, create an account or log in here:\nhttps://pyloop.xangey.dev/");
 	},
 
 	async EventSheet1_Event8_Act1(runtime, localVars)
