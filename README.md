@@ -1,97 +1,72 @@
 # PyLoop
 
-> Coding-themed idle clicker game built with Flask and Construct 3.
+A coding-themed idle clicker game. Earn LOC by clicking or buying upgrades that generate progress over time.
 
-🌐 Website: [https://pyloop.xangey.dev/](https://pyloop.xangey.dev/)
-
-PyLoop is an idle clicker game where players earn **LOC** by clicking or by purchasing automated upgrades that generate progress over time.
-
-This project was developed while experimenting with backend APIs, persistent storage systems, and real-time game synchronization.
+**Live:** [pyloop.xangey.dev](https://pyloop.xangey.dev/)
 
 ---
 
-## 🎮 Features
+## Local Setup
 
-* Session-based account save system
-* Automatic progress synchronization
-* Offline fallback mode when the server is unreachable
-* Upgrade-based idle progression mechanics
-* Background music and audio handling
-* Coding-themed UI design
-* Secure request validation headers
+### 1. Clone and enter the project
 
----
+```bash
+git clone https://github.com/yourusername/PyLoop.git
+cd PyLoop
+```
 
-## 🧠 Technical Overview
+### 2. Create environment file
 
-### Frontend
+```bash
+cp .env.example .env
+```
 
-* Construct 3 game engine
-* JavaScript event scripting
-* Fetch-based communication with backend APIs
+Edit `.env` and add a secret key:
+```
+TOKEN=your-secret-key-here
+```
 
-### Backend
+### 3. Initialize empty data files
 
-* Flask web server
-* JSON file storage per player account
-* Session-authenticated save management
-* Response security headers
-* Input validation middleware
+```bash
+echo "[]" > ips.json
+```
 
----
-
-## 💾 Save System
-
-Player progress is periodically synchronized with the backend server during gameplay.
-
-Stored game data includes:
-
-* LOC currency value
-* Click power multiplier
-* Automatic income rate
-* Upgrade ownership and pricing
-
-If the server cannot be reached, the game switches to offline mode, but progress may not be saved until connection is restored.
-
-> Note: This project is intended for educational use and is not production-level secure.
-
----
-
-## 🔐 Security Design
-
-* Header-based API authentication
-* Session-managed player identity
-* Basic request validation
-* HTTPS-compatible cookie handling
-
----
-
-## 🚀 Running Locally
-
-### Install dependencies
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Start backend server
+### 5. Run the server
 
+Development:
 ```bash
 python app.py
 ```
 
-Production deployment:
-
+Production (gunicorn):
 ```bash
 gunicorn -w 2 -b 127.0.0.1:6000 app:app
 ```
 
----
-
-## 📜 License
-
-This project is licensed under the MIT License.
+The game will be available at `http://localhost:5000` (or port 6000 for gunicorn).
 
 ---
 
-Made by xangey_fun
+## Project Structure
+
+- `app.py` - Flask backend
+- `saves/` - Player save data (JSON)
+- `static/` - Frontend assets
+- `templates/` - HTML templates
+
+---
+
+## Tech
+
+Flask + Construct 3
+
+---
+
+MIT License
