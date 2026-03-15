@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.middleware.proxy_fix import ProxyFix
 from dotenv import load_dotenv
 from datetime import datetime
+import requests
 import secrets
 import json
 import os
@@ -18,6 +19,7 @@ app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE='Lax'
 )
+HC_SECRET = os.getenv("HC_SECRET")
 os.makedirs("saves", exist_ok=True)
 if os.path.exists("ips.json"):
     with open("ips.json", "r") as f:
@@ -166,6 +168,22 @@ def profile_reset():
 
 @app.route("/api/register", methods=["POST"]) # type: ignore
 def api_register():
+    captcha_response = request.form.get("h-captcha-response")
+    if not captcha_response:
+        flash("Please complete the captcha.", "error")
+        return redirect("/register")
+
+    data = {
+        "secret": HC_SECRET,
+        "response": captcha_response,
+        "remoteip": request.remote_addr
+    }
+    r = requests.post("https://hcaptcha.com/siteverify", data=data)
+    result = r.json()
+    if not result.get("success"):
+        flash("Captcha failed, try again.", "error")
+        return redirect("/register")
+
     username = request.form.get("username").strip() # type: ignore
     password = request.form.get("password").strip() # type: ignore
 
@@ -216,6 +234,22 @@ def api_register():
 
 @app.route("/api/login", methods=["POST"]) # type: ignore
 def api_login():
+    captcha_response = request.form.get("h-captcha-response")
+    if not captcha_response:
+        flash("Please complete the captcha.", "error")
+        return redirect("/login")
+
+    data = {
+        "secret": HC_SECRET,
+        "response": captcha_response,
+        "remoteip": request.remote_addr
+    }
+    r = requests.post("https://hcaptcha.com/siteverify", data=data)
+    result = r.json()
+    if not result.get("success"):
+        flash("Captcha failed, try again.", "error")
+        return redirect("/login")
+    
     username = request.form.get("username").strip() # type: ignore
     password = request.form.get("password").strip() # type: ignore
 

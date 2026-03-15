@@ -10,8 +10,10 @@
         <input type="text" id="username" name="username" required minlength="3">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required minlength="6">
+        <div class="h-captcha" data-sitekey="a1eea6d6-1a36-4e40-9602-711c6d1ea3da"></div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
     <p class="auth-link">Don't have an account? <a href="/register">Register here</a>.</p>
 </section>
+<script src="https://hcaptcha.com/1/api.js" async defer></script>
 {% endblock %}
