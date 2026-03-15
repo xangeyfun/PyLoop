@@ -11,7 +11,7 @@ A coding-themed idle clicker game. Earn LOC by clicking or buying upgrades that 
 ### 1. Clone and enter the project
 
 ```bash
-git clone https://github.com/yourusername/PyLoop.git
+git clone https://github.com/xangeyfun/PyLoop.git
 cd PyLoop
 ```
 
