@@ -4,3 +4,4 @@ __pycache__/
 error_log.txt
 restart.sh
 ips.json
+database.db
